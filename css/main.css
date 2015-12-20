@@ -1,0 +1,753 @@
+/*! HTML5 Boilerplate v5.2.0 | MIT License | https://html5boilerplate.com/ */
+
+/*
+ * What follows is the result of much research on cross-browser styling.
+ * Credit left inline and big thanks to Nicolas Gallagher, Jonathan Neal,
+ * Kroc Camen, and the H5BP dev community and team.
+ */
+
+/* ==========================================================================
+   Base styles: opinionated defaults
+   ========================================================================== */
+
+html {
+    height: 100%;
+    color: #333;
+    font-size: 0.8em;
+    line-height: 1.4;
+}
+
+/*
+ * Remove text-shadow in selection highlight:
+ * https://twitter.com/miketaylr/status/12228805301
+ *
+ * These selection rule sets have to be separate.
+ * Customize the background color to match your design.
+ */
+
+::-moz-selection {
+    background: #b3d4fc;
+    text-shadow: none;
+}
+
+::selection {
+    background: #b3d4fc;
+    text-shadow: none;
+}
+
+/*
+ * A better looking default horizontal rule
+ */
+
+hr {
+    display: block;
+    height: 1px;
+    border: 0;
+    border-top: 1px solid #ccc;
+    margin: 1em 0;
+    padding: 0;
+}
+
+/*
+ * Remove the gap between audio, canvas, iframes,
+ * images, videos and the bottom of their containers:
+ * https://github.com/h5bp/html5-boilerplate/issues/440
+ */
+
+audio,
+canvas,
+iframe,
+img,
+svg,
+video {
+    vertical-align: middle;
+}
+
+/*
+ * Remove default fieldset styles.
+ */
+
+fieldset {
+    border: 0;
+    margin: 0;
+    padding: 0;
+}
+
+/*
+ * Allow only vertical resizing of textareas.
+ */
+
+textarea {
+    resize: vertical;
+}
+
+/* ==========================================================================
+   Browser Upgrade Prompt
+   ========================================================================== */
+
+.browserupgrade {
+    margin: 0.2em 0;
+    background: #ccc;
+    color: #000;
+    padding: 0.2em 0;
+}
+
+/* ==========================================================================
+   Author's custom styles
+   ========================================================================== */
+
+/** -----
+    Global **/
+
+body {
+    height: 100%;
+    margin: 0;
+}
+
+a {
+    color: #537186;
+    text-decoration: none;
+}
+
+.c-icon {
+    display: inline-block;
+    width: 22px;
+    height: 22px;
+}
+
+/** -----
+    Header **/
+
+.header {
+    background-color: #537186 ;
+}
+
+.header h1 {
+    margin: 0 10px;
+    font-size: 24px;
+    font-weight: normal;
+    line-height: 60px;
+    color: white;
+}
+
+/** -----
+    Structure **/
+
+.wrapper {
+    height: 100%;
+    position: relative;
+}
+
+
+/** -----
+    Side **/
+
+.side {
+    float: left;
+    width: 200px;
+    height: 100%;
+    font-size: 13px;
+    background-color: #ededed;
+}
+
+.side .welcome {
+    display: table;
+    width: 100%;
+    border-bottom: 1px solid #fff;
+}
+
+.side p {
+    display: table-cell;
+    height: 60px;
+    padding: 0 10px;
+    vertical-align: middle;
+    border-bottom: 1px solid #d2d2d2;
+}
+
+.side ul {
+    overflow: hidden;
+    padding: 0;
+    margin: 20px 0;
+    list-style: none;
+}
+
+.side li a {
+    float: left;
+    width: 100%;
+    padding: 10px;
+    line-height: 20px;
+}
+
+.side li a:hover {
+    background-color: #dfdfdf;
+}
+
+.side li a:before {
+    content: ' ';
+    float: left;
+    width: 18px;
+    height: 18px;
+    margin-right: 8px;
+    background-size: 100%;
+    background-repeat: no-repeat;
+}
+
+.side li.add-module a:before {
+    background-image: url("../img/add.svg");
+}
+
+.side li.my-profile a:before {
+    background-image: url("../img/profile.svg");
+}
+
+.side li.sign-out a:before {
+    background-image: url("../img/signout.svg");
+}
+
+
+/** -----
+    Content **/
+
+.content {
+    padding: 20px 0 20px 215px;
+}
+
+.content h2 {
+    margin: 5px 0;
+    font-weight: normal;
+    font-size: 24px;
+    line-height: 24px;
+}
+
+/** -----
+    Module **/
+
+.module {
+    float: left;
+    width: 29%;
+    border-radius: 10px;
+    background-color: #ededed;
+    margin: 0 15px 20px 15px;
+    min-height: 300px;
+    position: relative;
+    box-shadow: 2px 2px 2px rgba(0,0,0,0.15);
+}
+
+.module-thumb img {
+    border-radius: 10px 10px 0 0;
+    width: 100%;
+}
+
+.module-details {
+    padding: 10px 10px 55px;
+}
+
+.module-details p {
+    margin: 0;
+}
+
+/** -----
+    Progress bar
+    ----- **/
+.progress-bar {
+    position: absolute;
+    bottom: 20px;
+    left: 10px;
+    right: 10px;
+    overflow: hidden;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    height: 20px;
+    padding: 0 15px;
+    margin: 0;
+    border-radius: 10px;
+    background-color: #dcdcdc;
+    box-shadow: inset 1px 1px 2px rgba(0,0,0,0.2);
+}
+
+.progress-bar .completed {height: 100%;background-color: #fdc223;     border-radius: 10px;     box-shadow: inset 1px 1px 2px rgba(0,0,0,0.2);position: absolute;left: 0;transition: width 0.2s;}
+
+.progress-bar .text {
+    float: right;
+    font-size: 12px;
+    line-height: 20px;
+    position: relative;
+    z-index: 1;
+}
+
+
+/** -----
+    Tasks
+    ----- **/
+.tasks {
+    float: left;
+}
+
+.task {
+    margin-bottom: 20px;
+    border-radius: 10px;
+    background-color: #f5f5f5;
+    box-shadow: 2px 2px 2px rgba(0,0,0,0.15);
+    overflow: hidden;
+}
+
+.task-info {
+    height: 90px;
+}
+
+.task .completed {
+    float: left;
+    position: relative;
+    width: 8%;
+    height: 100%;
+    border-radius: 10px 0 0 10px;
+}
+
+.task.expand-task .completed {
+    border-radius: 10px 0 0 0;
+}
+
+.task .completed.tick {
+    background: #87df6d; /* Old browsers */
+    background: -moz-linear-gradient(top,  #87df6d 0%, #87df6d 60%, #9de887 100%); /* FF3.6-15 */
+    background: -webkit-linear-gradient(top,  #87df6d 0%,#87df6d 60%,#9de887 100%); /* Chrome10-25,Safari5.1-6 */
+    background: linear-gradient(to bottom,  #87df6d 0%,#87df6d 60%,#9de887 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#87df6d', endColorstr='#9de887',GradientType=0 ); /* IE6-9 */
+}
+
+.task .completed-inner {
+    position: absolute;
+    top: 50%;
+    width: 100%;
+    height: 55px;
+    margin-top: -27px;
+    text-align: center;
+    border-right: 1px solid #e2e2e2;
+}
+
+.task .completed.tick .c-icon-tick {
+    background: url(../img/tick.svg) no-repeat top left;
+    background-size: contain;
+    position: absolute;
+    top: 50%;
+    margin-top: -10px;
+    left: 50%;
+    margin-left: -10px;
+    height: 18px;
+    width: 24px;
+}
+
+.task .task-details {
+    display: flex;
+    align-items: center;
+    float: left;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    width: 77%;
+    height: 100%;
+    padding: 0 20px;
+}
+
+.task .task-details-inner {}
+
+.task .expand {
+    float: right;
+    position: relative;
+    width: 14%;
+    height: 100%;
+}
+
+.task .expand-inner {
+    position: absolute;
+    top: 50%;
+    width: 100%;
+    height: 55px;
+    margin-top: -27px;
+    text-align: center;
+    border-left: 1px solid #e2e2e2;
+}
+
+.task .c-icon-expand {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 20px;
+    height: 20px;
+    margin-top: -10px;
+    margin-left: -10px;
+    background-size: contain;
+    background-image: url(../img/expand.svg);
+    background-repeat: no-repeat;
+    transition: all 0.2s;
+}
+
+.task.expand-task .c-icon-expand {
+    transform: rotate(90deg);
+}
+
+.task h3 {
+    margin: 0;
+    font-size: 18px;
+    font-weight: normal;
+}
+
+.task .task-description {
+    margin: 5px 0 0;
+    font-size: 14px;
+}
+
+
+/** -----
+    Steps
+    ----- **/
+.steps {
+    width: 100%;
+    overflow: hidden;/* approximate max height */
+    max-height: 0;
+    transition: max-height 1s;
+}
+
+.task.expand-task .steps {
+  max-height: 1000px;
+}
+
+.steps ul {
+    margin: 20px 11.7% 35px;
+    padding: 0;
+    list-style: none;
+    position: relative;
+    /* top: -180px; */
+    transition: all 0.5s cubic-bezier(0, 1, 0.5, 1);
+}
+
+.steps li {
+    border-top: 1px solid #e2e2e2;
+    clear: both;
+    position: relative;
+}
+
+.steps li:first-child {
+    border-top: none;
+}
+
+.steps label {
+    display: block;
+    padding: 10px 35px;
+    font-size: 14px;
+    width: 100%;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+
+@media screen and (max-width:768px) {
+    .module {
+        width: 43%;
+    }
+}
+
+@media screen and (max-width:600px) {
+    body {
+        background-color: #537186;
+    }
+
+    .header {
+        background-color: #ededed;
+    }
+
+    .header h1 {
+        margin: 0 20px;
+        color: #333;
+        text-align: center;
+        font-size: 18px;
+        line-height: 36px;
+    }
+
+    .content {
+        padding: 10px;
+    }
+
+    .side {
+        display: none;
+    }
+
+    .module {
+        width: 100%;
+        min-height: 1px;
+        margin: 10px 0;
+    }
+
+    .module-thumb {
+        display: none;
+    }
+
+    .module-details {
+        padding: 10px 10px 45px;
+    }
+
+    .progress-bar {
+        bottom: 10px;
+    }
+}
+
+
+
+
+/* ==========================================================================
+   Custom Checkbox
+   ========================================================================== */
+/* Base for label styling */
+[type="checkbox"]:not(:checked),
+[type="checkbox"]:checked {
+  position: absolute;
+  left: -9999px;
+}
+[type="checkbox"]:not(:checked) + label,
+[type="checkbox"]:checked + label {
+  position: relative;
+  cursor: pointer;
+}
+
+/* checkbox aspect */
+[type="checkbox"]:not(:checked) + label:before,
+[type="checkbox"]:checked + label:before {
+  content: '';
+  position: absolute;
+  left:0;
+  top: 7px;
+  width: 23px;
+  height: 23px;
+  border-radius: 3px;
+  box-shadow: inset 0px 1px 1px rgba(0,0,0,0.2);
+  background-color: #bfccd7;
+}
+
+[type="checkbox"]:checked + label:before {
+  background-color: #87de6d;
+}
+
+/* checked mark aspect */
+[type="checkbox"]:not(:checked) + label:after,
+[type="checkbox"]:checked + label:after {
+  content: ' ';
+  position: absolute;
+  top: 7px;
+  left: 0px;
+  width: 23px;
+  height: 23px;
+  font-size: 18px;
+  line-height: 0.8;
+  color: #09ad7e;
+  /* transition: all .1s; */
+  background-image: url("../img/tick.svg");
+  background-size: 75%;
+  background-repeat: no-repeat;
+  background-position: 3px 5px;
+}
+/* checked mark aspect changes */
+[type="checkbox"]:not(:checked) + label:after {
+  opacity: 0;
+}
+[type="checkbox"]:checked + label:after {
+  opacity: 1;
+}
+/* disabled checkbox */
+[type="checkbox"]:disabled:not(:checked) + label:before,
+[type="checkbox"]:disabled:checked + label:before {
+  box-shadow: none;
+  border-color: #bbb;
+  background-color: #ddd;
+}
+[type="checkbox"]:disabled:checked + label:after {
+  color: #999;
+}
+[type="checkbox"]:disabled + label {
+  color: #aaa;
+}
+/* accessibility */
+[type="checkbox"]:checked:focus + label:before,
+[type="checkbox"]:not(:checked):focus + label:before {
+  
+}
+
+/* hover style just for information */
+label:hover:before {
+  background-color: #b0bdca !important;
+}
+
+[type="checkbox"]:checked + label:hover:before {
+  background-color: #78d05e  !important;;
+}
+
+
+
+
+
+
+/* ==========================================================================
+   Helper classes
+   ========================================================================== */
+
+/*
+ * Hide visually and from screen readers:
+ */
+
+.hidden {
+    display: none !important;
+}
+
+/*
+ * Hide only visually, but have it available for screen readers:
+ * http://snook.ca/archives/html_and_css/hiding-content-for-accessibility
+ */
+
+.visuallyhidden {
+    border: 0;
+    clip: rect(0 0 0 0);
+    height: 1px;
+    margin: -1px;
+    overflow: hidden;
+    padding: 0;
+    position: absolute;
+    width: 1px;
+}
+
+/*
+ * Extends the .visuallyhidden class to allow the element
+ * to be focusable when navigated to via the keyboard:
+ * https://www.drupal.org/node/897638
+ */
+
+.visuallyhidden.focusable:active,
+.visuallyhidden.focusable:focus {
+    clip: auto;
+    height: auto;
+    margin: 0;
+    overflow: visible;
+    position: static;
+    width: auto;
+}
+
+/*
+ * Hide visually and from screen readers, but maintain layout
+ */
+
+.invisible {
+    visibility: hidden;
+}
+
+/*
+ * Clearfix: contain floats
+ *
+ * For modern browsers
+ * 1. The space content is one way to avoid an Opera bug when the
+ *    `contenteditable` attribute is included anywhere else in the document.
+ *    Otherwise it causes space to appear at the top and bottom of elements
+ *    that receive the `clearfix` class.
+ * 2. The use of `table` rather than `block` is only necessary if using
+ *    `:before` to contain the top-margins of child elements.
+ */
+
+.clearfix:before,
+.clearfix:after {
+    content: " "; /* 1 */
+    display: table; /* 2 */
+}
+
+.clearfix:after {
+    clear: both;
+}
+
+/* ==========================================================================
+   EXAMPLE Media Queries for Responsive Design.
+   These examples override the primary ('mobile first') styles.
+   Modify as content requires.
+   ========================================================================== */
+
+@media only screen and (min-width: 35em) {
+    /* Style adjustments for viewports that meet the condition */
+}
+
+@media print,
+       (-webkit-min-device-pixel-ratio: 1.25),
+       (min-resolution: 1.25dppx),
+       (min-resolution: 120dpi) {
+    /* Style adjustments for high resolution devices */
+}
+
+/* ==========================================================================
+   Print styles.
+   Inlined to avoid the additional HTTP request:
+   http://www.phpied.com/delay-loading-your-print-css/
+   ========================================================================== */
+
+@media print {
+    *,
+    *:before,
+    *:after {
+        background: transparent !important;
+        color: #000 !important; /* Black prints faster:
+                                   http://www.sanbeiji.com/archives/953 */
+        box-shadow: none !important;
+        text-shadow: none !important;
+    }
+
+    a,
+    a:visited {
+        text-decoration: underline;
+    }
+
+    a[href]:after {
+        content: " (" attr(href) ")";
+    }
+
+    abbr[title]:after {
+        content: " (" attr(title) ")";
+    }
+
+    /*
+     * Don't show links that are fragment identifiers,
+     * or use the `javascript:` pseudo protocol
+     */
+
+    a[href^="#"]:after,
+    a[href^="javascript:"]:after {
+        content: "";
+    }
+
+    pre,
+    blockquote {
+        border: 1px solid #999;
+        page-break-inside: avoid;
+    }
+
+    /*
+     * Printing Tables:
+     * http://css-discuss.incutio.com/wiki/Printing_Tables
+     */
+
+    thead {
+        display: table-header-group;
+    }
+
+    tr,
+    img {
+        page-break-inside: avoid;
+    }
+
+    img {
+        max-width: 100% !important;
+    }
+
+    p,
+    h2,
+    h3 {
+        orphans: 3;
+        widows: 3;
+    }
+
+    h2,
+    h3 {
+        page-break-after: avoid;
+    }
+}
