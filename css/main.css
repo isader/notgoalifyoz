@@ -301,6 +301,7 @@ a {
     width: 8%;
     height: 100%;
     border-radius: 10px 0 0 10px;
+    transition: all 1s;
 }
 
 .task.expand-task .completed {
@@ -547,7 +548,7 @@ a {
   font-size: 18px;
   line-height: 0.8;
   color: #09ad7e;
-  /* transition: all .1s; */
+  transition: all .1s;
   background-image: url("../img/tick.svg");
   background-size: 75%;
   background-repeat: no-repeat;
