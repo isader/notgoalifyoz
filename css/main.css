@@ -102,6 +102,8 @@ textarea {
 body {
     height: 100%;
     margin: 0;
+    background-repeat: no-repeat;
+    background-size: cover;
 }
 
 a {
@@ -113,6 +115,62 @@ a {
     display: inline-block;
     width: 22px;
     height: 22px;
+}
+
+/** -----
+    Login
+    ----- **/
+.login-wrapper {
+  display: table;
+  width:320px;
+  height: 100%;
+  margin: 0 auto;
+}
+
+.login-inner-wrapper {
+  display: table-cell;
+  vertical-align: middle;
+}
+
+.login-form {
+  padding: 25px 20px;
+  background-color: white;
+  box-shadow: 1px 5px 10px rgba(0,0,0,0.3);
+  border-radius: 5px;
+}
+
+.login-form h1 {
+  margin: 0 0 15px;
+  font-size: 36px;
+  font-weight: normal;
+  line-height: 40px;
+  text-align: center;
+}
+
+.login-form input {
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  width: 100%;
+  padding: 10px;
+  margin: 8px 0;
+}
+
+input[type=submit] {
+  font-size: 14px;
+  font-weight: normal;
+  color: white;
+  background-color: #537186;
+  border: none;
+  border-radius: 3px;
+  box-shadow: 1px 1px 2px 0 rgba(0,0,0,0.3);
+}
+
+input[type=submit]:hover {
+  background-color: #446073;
+}
+
+.login-form p {
+  margin: 0px 2px 8px;
 }
 
 /** -----
@@ -500,6 +558,95 @@ a {
     }
 }
 
+
+.modules-popup {
+  position: relative;
+  background: #FFF;
+  padding: 20px;
+  width: auto;
+  max-width: 500px;
+  margin: 20px auto;
+}
+
+.modules-popup .module {
+  float: none;
+  position: relative;
+  width: 100%;
+  min-height: 0;
+  margin: 0 0 20px;
+}
+
+.modules-popup .module:hover {
+    cursor: pointer;
+}
+
+.modules-popup .module h2 {
+  margin: 10px 0;
+}
+
+.modules-popup .module-details {
+    padding-bottom: 20px;
+}
+
+.modules-popup .module .add-module-action {
+    display: none;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    text-align: center;
+    border-radius: 10px;
+    background-color: rgba(200, 200, 200, 0.9);
+}
+
+.modules-popup .module:hover .add-module-action {
+    display: block;
+}
+
+.modules-popup .module .add-icon {
+    display: block;
+    width: 100%;
+    height: 100%;
+    font-size: 24px;
+}
+
+.modules-popup .module .add-icon.hide {
+    display: none !important;
+}
+
+.modules-popup .module .add-icon:before {
+    content: ' ';
+    display: block;
+    width: 100px;
+    height: 100px;
+    margin: 25px auto 10px;
+    background-image: url("../img/add.svg");
+    background-size: 100%;
+    background-repeat: no-repeat
+}
+
+.modules-popup .module .already-added {
+    display: block;
+    width: 100%;
+    height: 100%;
+    font-size: 24px;
+}
+
+.modules-popup .module .already-added.hide {
+    display: none !important;
+}
+
+.modules-popup .module .already-added:before {
+    content: ' ';
+    display: block;
+    width: 100px;
+    height: 75px;
+    margin: 38px auto 10px;
+    background-image: url("../img/tick.svg");
+    background-size: 100%;
+    background-repeat: no-repeat
+}
 
 
 

@@ -11,6 +11,7 @@
         <!-- Place favicon.ico in the root directory -->
 
         <link rel="stylesheet" href="css/normalize.css">
+        <link rel="stylesheet" href="bower_components/magnific-popup/dist/magnific-popup.css">
         <link rel="stylesheet" href="css/main.css">
         <script src="js/vendor/modernizr-2.8.3.min.js"></script>
     </head>
@@ -31,7 +32,7 @@
                 </div>
 
                 <ul class="menu">
-                    <li class="add-module"><a href="#">Add module</a></li>
+                    <li class="add-module"><a href="#modules-popup" class="open-popup-link">Add module</a></li>
                     <li class="my-profile"><a href="#">My profile</a></li>
                     <li class="sign-out"><a href="#">Sign out</a></li>
                 </ul>
@@ -113,9 +114,74 @@
         </div>
 
 
+        <div id="modules-popup" class="modules-popup mfp-hide">
+            <div class="add-modules-container">
+                <h2>Add module</h2>
+                <p class="description">Some description about adding new modules</p>
+
+                <div class="module-list">
+                    <div class="module welcome-to-australia">
+                        <div class="module-thumb">
+                            <img src="img/thumb_welcome.jpg" />
+                        </div>
+                        <div class="module-details">
+                            <h2>SSI Welcome module</h2>
+                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras in aliquam elit. Morbi vitae ante justo.</p>
+                        </div>
+                        <div class="add-module-action">
+                            <span class="add-icon">Add this module</span>
+                        </div>
+                    </div>
+
+
+                    <div class="module welcome-to-australia">
+                        <div class="module-thumb">
+                            <img src="img/thumb_welcome.jpg" />
+                        </div>
+                        <div class="module-details">
+                            <h2>SSI Welcome module</h2>
+                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras in aliquam elit. Morbi vitae ante justo.</p>
+                        </div>
+                        <div class="add-module-action">
+                            <span class="add-icon hide">Add this module</span>
+                            <span class="already-added">This module has already been added</span>
+                        </div>
+                    </div>
+
+                    <div class="module welcome-to-australia">
+                        <div class="module-thumb">
+                            <img src="img/thumb_welcome.jpg" />
+                        </div>
+                        <div class="module-details">
+                            <h2>SSI Welcome module</h2>
+                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras in aliquam elit. Morbi vitae ante justo.</p>
+                        </div>
+                        <div class="add-module-action">
+                            <span class="add-icon">Add this module</span>
+                        </div>
+                    </div>
+
+                    <div class="module welcome-to-australia">
+                        <div class="module-thumb">
+                            <img src="img/thumb_welcome.jpg" />
+                        </div>
+                        <div class="module-details">
+                            <h2>SSI Welcome module</h2>
+                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras in aliquam elit. Morbi vitae ante justo.</p>
+                        </div>
+                        <div class="add-module-action">
+                            <span class="add-icon">Add this module</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
 
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
         <script>window.jQuery || document.write('<script src="js/vendor/jquery-1.11.3.min.js"><\/script>')</script>
+        <script src="bower_components/magnific-popup/dist/jquery.magnific-popup.min.js"></script>
         <script src="js/plugins.js"></script>
         <script src="js/main.js"></script>
 
