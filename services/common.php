@@ -19,21 +19,25 @@
 		return $out;
 	}
 	
-	function checkString ($string) {
+	function checkString ($value) {
+		$value = trim($value); //remove empty spaces
+	    $value = strip_tags($value); //remove html tags
+	    $value = filter_var($value, FILTER_SANITIZE_MAGIC_QUOTES); //addslashes();
+	    $value = filter_var($value, FILTER_SANITIZE_STRING, FILTER_FLAG_STRIP_LOW); //remove /t/n/g/s
+	    $value = filter_var($value, FILTER_SANITIZE_STRING, FILTER_FLAG_STRIP_HIGH); //remove é à ò ì ` ecc...
+	    $value = htmlentities($value, ENT_QUOTES,'UTF-8'); //for major security transform some other chars into html corrispective...
+
+	    return $value;
+
+		/*
 		if (isset($string) && !empty($string)) {
-			// connect(); // Connect to DB to make sure that mysql_real_escape_string() function will work
-			//if (get_magic_quotes_gpc()) {
-		    //	$string = stripslashes($string);
-		    //}
-			$string2 = preg_replace("/[\n|\r]/","", $string);
-			//$string2 = nl2br($string);
-			//$string3 = str_replace("<br />", "", $string2);
+			$string = preg_replace("/[\n|\r]/","", $string);
 		    
-			return addslashes($string2);
+			return addslashes($string);
 		}
 		
 	    return "";
-		
+		*/
 	}
 
 	function errorResponse ($message) {

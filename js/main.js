@@ -1,23 +1,50 @@
 (function () {
 	$(document).ready(function () {
-		
-		$(".expand").on('click', function (event) {
-			event.preventDefault();
+		function loginBackground () {
+			var min = 1,
+				max = 3;
 
-			$(this).parents('.task').toggleClass('expand-task');
-		});
+			var index = Math.floor(Math.random() * (max - min + 1)) + min;
+			$("#login").css({
+				'background-image': 'url(backgrounds/' + index + '.jpg)'
+			});
+		}
 
-		var min = 1,
-			max = 3;
+		function attachEvents () {
+			// Expand task
+			$(".expand").on('click', function (event) {
+				event.preventDefault();
 
-		var index = Math.floor(Math.random() * (max - min + 1)) + min;
-		$("#login").css({
-			'background-image': 'url(backgrounds/' + index + '.jpg)'
-		});
+				$(this).parents('.task').toggleClass('expand-task');
+			});
 
-		$('.open-popup-link').magnificPopup({
-  			type:'inline',
-  			midClick: true // Allow opening popup on middle mouse click. Always set it to true if you don't provide alternative source in href.
-		});
+			// Login page - switch to sign up form
+			$(".j-switch-to-signup").on('click', function (event) {
+				event.preventDefault();
+
+				$("#signup-form").removeClass("hidden");
+				$("#login-form").addClass("hidden");
+			});
+
+			// Login page - switch to login form
+			$(".j-switch-to-login").on('click', function (event) {
+				event.preventDefault();
+
+				$("#login-form").removeClass("hidden");
+				$("#signup-form").addClass("hidden");
+			});
+
+			// Sign out link
+			$(".sign-out").on('click', function (event) {
+				event.preventDefault();
+				
+				$.removeCookie("ud");
+				location.reload();
+			});
+		}
+
+		loginBackground();
+		attachEvents();
+		$("#userName").html(user.first_name);
 	});
 })();

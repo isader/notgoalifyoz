@@ -121,56 +121,75 @@ a {
     Login
     ----- **/
 .login-wrapper {
-  display: table;
-  width:320px;
-  height: 100%;
-  margin: 0 auto;
+    display: table;
+    width:320px;
+    height: 100%;
+    margin: 0 auto;
 }
 
 .login-inner-wrapper {
-  display: table-cell;
-  vertical-align: middle;
+    display: table-cell;
+    vertical-align: middle;
 }
 
 .login-form {
-  padding: 25px 20px;
-  background-color: white;
-  box-shadow: 1px 5px 10px rgba(0,0,0,0.3);
-  border-radius: 5px;
+    padding: 25px 20px;
+    background-color: white;
+    box-shadow: 1px 5px 10px rgba(0,0,0,0.3);
+    border-radius: 5px;
 }
 
 .login-form h1 {
-  margin: 0 0 15px;
-  font-size: 36px;
-  font-weight: normal;
-  line-height: 40px;
-  text-align: center;
+    margin: 0 0 15px;
+    font-size: 36px;
+    font-weight: normal;
+    line-height: 40px;
+    text-align: center;
+}
+
+.login-form h2 {
+    margin: 10px 0 3px;
+    font-weight: normal;
 }
 
 .login-form input {
-  -moz-box-sizing: border-box;
-  box-sizing: border-box;
-  width: 100%;
-  padding: 10px;
-  margin: 8px 0;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    width: 100%;
+    padding: 10px;
+    margin: 8px 0;
 }
 
 input[type=submit] {
-  font-size: 14px;
-  font-weight: normal;
-  color: white;
-  background-color: #537186;
-  border: none;
-  border-radius: 3px;
-  box-shadow: 1px 1px 2px 0 rgba(0,0,0,0.3);
+    font-size: 14px;
+    font-weight: normal;
+    color: white;
+    background-color: #537186;
+    border: none;
+    border-radius: 3px;
+    box-shadow: 1px 1px 2px 0 rgba(0,0,0,0.3);
 }
 
 input[type=submit]:hover {
-  background-color: #446073;
+    background-color: #446073;
 }
 
 .login-form p {
-  margin: 0px 2px 8px;
+    margin: 0px 2px 8px;
+}
+
+.login-form a {
+    text-decoration: underline;
+}
+
+.login-form .signup-success {
+    margin: 15px 0;
+}
+
+.login-bottom-link {
+    display: block;
+    text-align: center;
+    margin-top:10px;
 }
 
 /** -----
@@ -267,7 +286,7 @@ input[type=submit]:hover {
     Content **/
 
 .content {
-    padding: 20px 0 20px 215px;
+    padding: 20px 15px 20px 215px;
 }
 
 .content h2 {
@@ -291,6 +310,11 @@ input[type=submit]:hover {
     box-shadow: 2px 2px 2px rgba(0,0,0,0.15);
 }
 
+#user-modules .module:hover {
+  cursor: pointer;
+  background-color: #e6e6e6;
+}
+
 .module-thumb img {
     border-radius: 10px 10px 0 0;
     width: 100%;
@@ -302,6 +326,25 @@ input[type=submit]:hover {
 
 .module-details p {
     margin: 0;
+}
+
+.no-modules {
+    text-align: center;
+}
+
+.no-modules h2 {
+    font-size: 28px;
+    margin-top: 45px;
+}
+
+.no-modules p {
+    font-size: 16px;
+    width: 50%;
+    margin: 20px auto 0;
+}
+
+.no-modules a {
+    text-decoration: underline;
 }
 
 /** -----
@@ -339,6 +382,7 @@ input[type=submit]:hover {
     ----- **/
 .tasks {
     float: left;
+    width: 65%;
 }
 
 .task {

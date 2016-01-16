@@ -1,0 +1,26 @@
+{
+  "name": "settleIn",
+  "homepage": "https://github.com/isader/notgoalifyoz",
+  "authors": [
+    "Imad Sader <imadsader@gmail.com>"
+  ],
+  "description": "",
+  "main": "",
+  "moduleType": [],
+  "license": "MIT",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "jquery.cookie": "~1.4.1",
+    "jquery": "~2.1.4",
+    "magnific-popup": "~1.0.1",
+    "modernizr": "~3.2.0",
+    "underscore": "~1.8.3"
+  }
+}

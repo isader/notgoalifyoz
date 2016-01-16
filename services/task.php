@@ -29,6 +29,11 @@
 					if (checkId($user_id)) {
 						$task_progress_result = taskProgressByTaskIdUserId($task['task_id'], $user_id);
 
+						$task_progress_array = array(
+							"progress" => "0",
+							"is_complete" => "0",
+							"date_completed" => ""
+						);
 						while ($task_progress = mysql_fetch_array($task_progress_result)) {
 							$task_progress_array = array(
 								"progress" => $task_progress['progress'],
@@ -55,6 +60,10 @@
 						if (checkId($user_id)) {
 							$step_progress_result = stepProgressByStepIdUserId($step['step_id'], $user_id);
 
+							$step_progress_array = array(
+								"is_complete" => "0",
+								"date_completed" => ""
+							);
 							while ($step_progress = mysql_fetch_array($step_progress_result)) {
 								$step_progress_array = array(
 									"is_complete" => $step_progress['is_complete'],
@@ -86,7 +95,7 @@
 		}
 	}
 	else {
-		$response = errorResponse("Both user id and module id are expected");
+		$response = errorResponse("module_id is expected");
 	}
 
 	echo $response;
