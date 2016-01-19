@@ -532,7 +532,7 @@ input[type=submit]:hover {
 }
 
 .steps ul {
-    margin: 20px 11.7% 35px;
+    margin: 0px 11.7% 35px;
     padding: 0;
     list-style: none;
     position: relative;
@@ -557,6 +557,14 @@ input[type=submit]:hover {
     width: 100%;
     -moz-box-sizing: border-box;
     box-sizing: border-box;
+}
+
+.steps .step-desc {
+    margin: 0 35px 10px;
+}
+
+.steps .step-desc a {
+    text-decoration: underline;
 }
 
 

@@ -33,7 +33,7 @@
 		if ($step_updated) {
 			$task_updated = updateTaskProgress($task_id, $user_id, $task_progress, $task_is_complete, $task_date_completed);
 
-			if ($step_removed) {
+			if ($task_updated) {
 				$module_updated = updateModuleProgress($module_id, $user_id, $module_progress, $module_is_complete, $module_date_completed);
 
 				if ($module_updated) {
@@ -175,7 +175,7 @@
 	function updateTaskProgress ($task_id, $user_id, $progress, $is_complete, $date_completed) {
 		$task_already_added = isTaskAlreadyAdded($user_id, $task_id);
 
-		if ($step_already_added) {
+		if ($task_already_added) {
 			$sql = sprintf("UPDATE user_task SET progress = '%s', is_complete = '%s', date_completed = '%s' WHERE user_id = %d AND task_id = %d",
 				$progress, $is_complete, $date_completed, $user_id, $task_id
 			);
@@ -193,6 +193,8 @@
 		$sql = sprintf("UPDATE user_module SET progress = '%s', is_complete = '%s', date_completed = '%s' WHERE user_id = %d AND module_id = %d",
 			$progress, $is_complete, $date_completed, $user_id, $module_id
 		);
+
+		echo $sql;
 
 		return executeSql($sql);
 	}

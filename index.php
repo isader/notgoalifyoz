@@ -98,6 +98,7 @@
                                 <li>
                                     <input type="checkbox" id="step_<%= step.id %>" data-step-id="<%= step.id %>" name="step_<%= step.id %>" <%= checked %> />
                                     <label for="step_<%= step.id %>"><%= step.name %></label>
+                                    <div class="step-desc"><%= step.brief_desc %></div>
                                 </li>
                                 <%
                                     });

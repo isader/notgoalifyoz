@@ -11,7 +11,7 @@
 		//$sql = sprintf("SELECT t.task_id, s.step_id, s.name, s.brief_desc, us.is_complete, us.date_completed FROM step s JOIN task_step ts ON s.step_id = ts.step_id JOIN task t ON ts.task_id = t.task_id JOIN user_step us ON s.step_id = us.step_id JOIN user u ON us.user_id = u.user_id WHERE t.task_id = %d AND u.user_id = %d",
 		//		$task_id, $user_id);
 
-		$sql = sprintf("SELECT s.step_id, name, brief_desc FROM step s JOIN task_step ts ON s.step_id = ts.step_id WHERE task_id = %d",
+		$sql = sprintf("SELECT s.step_id, name, brief_desc FROM step s JOIN task_step ts ON s.step_id = ts.step_id WHERE task_id = %d ORDER BY step_id ASC",
 			$task_id);
 
 		return executeSql($sql);

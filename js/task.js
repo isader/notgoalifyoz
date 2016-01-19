@@ -118,6 +118,7 @@
 
 				$("#selected-module-tasks").html(html);
 				$("#selected-module-details").attr('data-module-id', data.module_id);
+				$("#selected-module-details a").attr("target", "_blank");
 
 				attachEvents();
 			}
