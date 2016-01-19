@@ -1,12 +1,57 @@
 <?php
     include_once("connect.php");
 	include_once("common.php");
+	include_once("step.php");
 	
 	$user_id = (isset($user_id)) ? $user_id : $_GET['user_id'];
 	$module_id = (isset($module_id)) ? $module_id : $_GET['module_id'];
+	$step_action = (isset($step_action)) ? $step_action : $_GET['step_action'];
+	$task_id = (isset($task_id)) ? $task_id : $_GET['task_id'];
+	$step_id = (isset($step_id)) ? $step_id : $_GET['step_id'];
 	$response = "";
 	
-	if ($module_id) {
+	if ($step_action) {
+		$step_is_complete = (isset($step_is_complete)) ? $step_is_complete : $_GET['step_is_complete'];
+		$step_date_completed = (isset($step_date_completed)) ? $step_date_completed : $_GET['step_date_completed'];
+
+		$task_progress = (isset($task_progress)) ? $task_progress : $_GET['task_progress'];
+		$task_is_complete = (isset($task_is_complete)) ? $task_is_complete : $_GET['task_is_complete'];
+		$task_date_completed = (isset($task_date_completed)) ? $task_date_completed : $_GET['task_date_completed'];
+
+		$module_progress = (isset($module_progress)) ? $module_progress : $_GET['module_progress'];
+		$module_is_complete = (isset($module_is_complete)) ? $module_is_complete : $_GET['module_is_complete'];
+		$module_date_completed = (isset($module_date_completed)) ? $module_date_completed : $_GET['module_date_completed'];
+
+		if ($step_action == "record") {
+			$step_updated = recordStepProgress($step_id, $user_id, $step_is_complete, $step_date_completed);
+			$message = "Tep has been recorded successfully";
+		}
+		else if ($step_action == "remove") {
+			$step_updated = removeStepProgress($step_id, $user_id);
+			$message = "Tep has been removed successfully";
+		}
+		if ($step_updated) {
+			$task_updated = updateTaskProgress($task_id, $user_id, $task_progress, $task_is_complete, $task_date_completed);
+
+			if ($step_removed) {
+				$module_updated = updateModuleProgress($module_id, $user_id, $module_progress, $module_is_complete, $module_date_completed);
+
+				if ($module_updated) {
+					$response = '{"status": "ok", "message": "'.$message.'"}';
+				}
+				else {
+					$response = '{"status": "error", "message": "The module progress could not be updated. Please try again later."}';
+				}
+			}
+			else {
+				$response = '{"status": "error", "message": "The task progress could not be updated. Please try again later."}';
+			}
+		}
+		else {
+			$response = '{"status": "error", "message": "The step progress could not be recorded. Please try again later."}';
+		}
+	}
+	else if ($module_id) {
 		if (checkId($module_id)) {
 
 			$module_array = array();
@@ -34,6 +79,7 @@
 							"is_complete" => "0",
 							"date_completed" => ""
 						);
+
 						while ($task_progress = mysql_fetch_array($task_progress_result)) {
 							$task_progress_array = array(
 								"progress" => $task_progress['progress'],
@@ -100,8 +146,7 @@
 
 	echo $response;
 
-
-
+	
 
 
 	function taskByModuleId ($module_id) {
@@ -110,25 +155,8 @@
 	}
 
 	function getTaskByModuleId ($module_id) {
-		//$sql = sprintf("SELECT m.module_id, t.task_id, t.name, t.brief_desc, t.desc, t.thumb_url, progress FROM task t JOIN module_task mt ON t.task_id = mt.task_id JOIN module m ON mt.module_id = m.module_id JOIN user_task ut ON t.task_id = ut.task_id JOIN user u ON ut.user_id = u.user_id WHERE m.module_id = %d AND u.user_id = %d",
-		//		$module_id, $user_id);
-
 		$sql = sprintf("SELECT t.task_id, name, brief_desc, t.desc, thumb_url FROM task t JOIN module_task mt ON t.task_id = mt.task_id WHERE module_id = %d",
 				$module_id);
-
-		return executeSql($sql);
-	}
-
-	function stepByTaskId ($task_id) {
-		return getStepByTaskId ($task_id);
-	}
-
-	function getStepByTaskId ($task_id) {
-		//$sql = sprintf("SELECT t.task_id, s.step_id, s.name, s.brief_desc, us.is_complete, us.date_completed FROM step s JOIN task_step ts ON s.step_id = ts.step_id JOIN task t ON ts.task_id = t.task_id JOIN user_step us ON s.step_id = us.step_id JOIN user u ON us.user_id = u.user_id WHERE t.task_id = %d AND u.user_id = %d",
-		//		$task_id, $user_id);
-
-		$sql = sprintf("SELECT s.step_id, name, brief_desc FROM step s JOIN task_step ts ON s.step_id = ts.step_id WHERE task_id = %d",
-			$task_id);
 
 		return executeSql($sql);
 	}
@@ -144,15 +172,39 @@
 		return executeSql($sql);
 	}
 
-	function stepProgressByStepIdUserId ($step_id, $user_id) {
-		return getStepProgressByStepIdUserId($step_id, $user_id);
-	}
+	function updateTaskProgress ($task_id, $user_id, $progress, $is_complete, $date_completed) {
+		$task_already_added = isTaskAlreadyAdded($user_id, $task_id);
 
-	function getStepProgressByStepIdUserId ($step_id, $user_id) {
-		$sql = sprintf("SELECT * FROM user_step WHERE step_id = %d AND user_id = %d",
-			$step_id, $user_id);
+		if ($step_already_added) {
+			$sql = sprintf("UPDATE user_task SET progress = '%s', is_complete = '%s', date_completed = '%s' WHERE user_id = %d AND task_id = %d",
+				$progress, $is_complete, $date_completed, $user_id, $task_id
+			);
+		}
+		else {
+			$sql = sprintf("INSERT INTO user_task (user_id, task_id, progress, is_complete, date_completed) VALUE (%d, %d, '%s', '%s', '%s')",
+				$user_id, $task_id, $progress, $is_complete, $date_completed
+			);
+		}
 
 		return executeSql($sql);
+	}
+
+	function updateModuleProgress ($module_id, $user_id, $progress, $is_complete, $date_completed) {
+		$sql = sprintf("UPDATE user_module SET progress = '%s', is_complete = '%s', date_completed = '%s' WHERE user_id = %d AND module_id = %d",
+			$progress, $is_complete, $date_completed, $user_id, $module_id
+		);
+
+		return executeSql($sql);
+	}
+
+	function isTaskAlreadyAdded ($user_id, $task_id) {
+		$sql = sprintf("SELECT user_task_id FROM user_task WHERE user_id = %d AND task_id = %d",
+				$user_id, $task_id
+		);
+
+		$exists = executeSql($sql);
+
+		return mysql_num_rows($exists);
 	}
 	
 	function formJson ($result) {

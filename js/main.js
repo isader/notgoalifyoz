@@ -11,13 +11,6 @@
 		}
 
 		function attachEvents () {
-			// Expand task
-			$(".expand").on('click', function (event) {
-				event.preventDefault();
-
-				$(this).parents('.task').toggleClass('expand-task');
-			});
-
 			// Login page - switch to sign up form
 			$(".j-switch-to-signup").on('click', function (event) {
 				event.preventDefault();
@@ -45,6 +38,8 @@
 
 		loginBackground();
 		attachEvents();
-		$("#userName").html(user.first_name);
+		if (typeof user !== 'undefined') {
+			$("#userName").html(user.first_name);
+		}
 	});
 })();

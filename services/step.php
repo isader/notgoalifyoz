@@ -1,172 +1,71 @@
 <?php
-    include_once("connect.php");
+
+	include_once("connect.php");
 	include_once("common.php");
-	
-	$type = (isset($type)) ? $type : $_GET['type'];
-	$response = "";
-	
-	if ($type) {
-		switch ($type) {
-		    case "coords":
-				if (isset($_GET['lat']) && isset($_GET['lng'])) {
-					$lat = checkCoord($_GET['lat']);
-					$lng = checkCoord($_GET['lng']);
-					if ($lat && $lng) {
-						$response = closestToLatLng($lat, $lng);
-					}
-				}
-		        break;
-			case "address":
-				if (isset($_GET['address'])) {
-					$address = checkAddress($_GET['address']);
-					if ($address) {
-						$response = closestToAddress($address);
-					}
-				}
-				break;
-		    default:
-		    	$response = "Incorrect type";
-				break;
-		}
-	}
-	else {
+
+	function stepByTaskId ($task_id) {
+		return getStepByTaskId ($task_id);
 	}
 
-	echo $response;
-	
-	
-	function closestToLatLng ($lat, $lng) {
-		$coords->lat = $lat;
-		$coords->lng = $lng;
-		$dimeter = 0;
-		
-		do {
-			$dimeter = $dimeter + 1;
-			$result = getLocationsByLatLng($coords, $dimeter);
-		}
-		while (mysql_num_rows($result) == 0);
-		return formJson($result, $coords, $dimeter);
-	}
-	
-	function closestToAddress ($address) {
-		$coords = geoCodeAddress($address);
-		$coords->address = $address;
-		$dimeter = 0;
+	function getStepByTaskId ($task_id) {
+		//$sql = sprintf("SELECT t.task_id, s.step_id, s.name, s.brief_desc, us.is_complete, us.date_completed FROM step s JOIN task_step ts ON s.step_id = ts.step_id JOIN task t ON ts.task_id = t.task_id JOIN user_step us ON s.step_id = us.step_id JOIN user u ON us.user_id = u.user_id WHERE t.task_id = %d AND u.user_id = %d",
+		//		$task_id, $user_id);
 
-		do {
-			$dimeter = $dimeter + 1;
-			$result = getLocationsByLatLng($coords, $dimeter);
-		}
-		while (mysql_num_rows($result) == 0);
-		return formJson($result, $coords, $dimeter);
-	}
-	
-	function getLocationsByLatLng($coords, $dimeter) {
-		$sql = "SELECT masjid_id, masjid_name, masjid_address, masjid_latitude, masjid_longitude, masjid_phone, masjid_fax, masjid_mobile, masjid_email, masjid_website, masjid_comment, masjid_jummah_address, masjid_jummah_comment, (6371 * acos(cos(radians($coords->lat)) * cos(radians(masjid_latitude)) * cos(radians(masjid_longitude) - radians($coords->lng)) + sin(radians($coords->lat)) * sin(radians(masjid_latitude)))) AS distance FROM masjid HAVING distance < $dimeter ORDER BY distance LIMIT 0, 500";
+		$sql = sprintf("SELECT s.step_id, name, brief_desc FROM step s JOIN task_step ts ON s.step_id = ts.step_id WHERE task_id = %d",
+			$task_id);
+
 		return executeSql($sql);
 	}
-	
-	function geoCodeAddress ($address) {
-		$address = 'address=' . urlencode($address);
-		$address = htmlentities($address);
-		$url = 'http://maps.googleapis.com/maps/api/geocode/xml?' . $address . '&sensor=true';
-		$xml = getContent($url);
-		
-		foreach ($xml->result as $result) {
-			$coords->lat = (string) $result->geometry->location->lat;
-			$coords->lng = (string) $result->geometry->location->lng;
+
+	function stepProgressByStepIdUserId ($step_id, $user_id) {
+		return getStepProgressByStepIdUserId($step_id, $user_id);
+	}
+
+	function getStepProgressByStepIdUserId ($step_id, $user_id) {
+		$sql = sprintf("SELECT * FROM user_step WHERE step_id = %d AND user_id = %d",
+			$step_id, $user_id);
+
+		return executeSql($sql);
+	}
+
+	function isStepAlreadyAdded ($user_id, $step_id) {
+		$sql = sprintf("SELECT user_step_id FROM user_step WHERE user_id = %d AND step_id = %d",
+				$user_id, $step_id
+		);
+
+		$exists = executeSql($sql);
+
+		return mysql_num_rows($exists);
+	}
+
+
+	function recordStepProgress ($step_id, $user_id, $is_complete, $date_completed) {
+		$step_already_added = isStepAlreadyAdded($user_id, $step_id);
+
+		if ($step_already_added) {
+
+			return '{"status": "error", "message": "The user has already completed this task"}';
 		}
-		
-		return $coords;
+		else {
+			$sql = sprintf("INSERT INTO user_step (user_id, step_id, is_complete, date_completed) VALUE ('%s', '%s', '%s', '%s')",
+				$user_id, $step_id, $is_complete, $date_completed
+			);
+
+			$done = executeSql($sql);
+
+			if ($done) {
+				return '{"status": "ok", "message": "Step has been added successfully!", "step_id": '.$step_id.'}';
+			}
+			else {
+				return '{"status": "error", "message": "There was a problem while checking this step. Please try again later"}';
+			}
+		}
 	}
-	
-	class Masjid {
-	    public $id;
-		public $name;
-		public $address;
-		public $lat;
-		public $lng;
-		public $phone;
-		public $fax;
-		public $mobile;
-		public $email;
-		public $website;
-		public $comment;
-		public $jummah_address;
-		public $jummah_comment;
-		public $distance;
-	}
-	
-	function formJson ($result, $coords, $dimeter) {
-		$count = 1;
-		$JSON = "{";
-		$JSON .= "\"totalCount\": ".mysql_num_rows($result).", ";
-		$JSON .= "\"lat\": ".$coords->lat.", ";
-		$JSON .= "\"lng\": ".$coords->lng.", ";
-		$JSON .= "\"dimeter\": ".$dimeter.", ";
-		$JSON .= "\"address\": \"".$coords->address."\", ";
-		
-		$masjids = array();
-		$count = 0;
-		while ($item = mysql_fetch_array($result)) {
-			$masjid = new Masjid();
-			$masjid->id = $item['masjid_id'];
-			$masjid->name = $item['masjid_name'];
-			$masjid->address = $item['masjid_address'];
-			$masjid->lat = $item['masjid_latitude'];
-			$masjid->lng = $item['masjid_longitude'];
-			$masjid->phone = $item['masjid_phone'];
-			$masjid->fax = $item['masjid_fax'];
-			$masjid->mobile = $item['masjid_mobile'];
-			$masjid->email = $item['masjid_email'];
-			$masjid->website = $item['masjid_website'];
-			$masjid->comment = $item['masjid_comment'];
-			$masjid->jummah_address = $item['masjid_jummah_address'];
-			$masjid->jummah_comment = $item['masjid_jummah_comment'];
-			$masjid->distance = number_format($item['distance'], 2);
-			$masjids[$count] = $masjid;
-			$count = $count + 1;
-	  	}
-		
-		$JSON .= "\"masjids\":" . json_encode($masjids).'}';
-		
-	  	return $JSON;
-	}
-	
-	function formJson2 ($result, $coords) {
-		$count = 1;
-		$JSON = "{";
-		$JSON .= "\"totalCount\": ".mysql_num_rows($result).", ";
-		$JSON .= "\"lat\": ".$coords->lat.", ";
-		$JSON .= "\"lng\": ".$coords->lng.", ";
-		$JSON .= "\"address\": \"".$coords->address."\", ";
-		$JSON .= "\"masjids\": [";
-		while ($item = mysql_fetch_array($result)) {
-			$JSON .= "{\"id\": \"".mysql_escape_string($item['masjid_id'])."\", ";
-			$JSON .= "\"name\": \"".br2nl($item['masjid_name'])."\", ";
-			$JSON .= "\"address\": \"".mysql_escape_string(br2nl($item['masjid_address']))."\", ";
-			$JSON .= "\"lat\": ".mysql_escape_string($item['masjid_latitude']).", ";
-			$JSON .= "\"lng\": ".mysql_escape_string($item['masjid_longitude']).", ";
-			$JSON .= "\"phone\": \"".mysql_escape_string($item['masjid_phone'])."\", ";
-			$JSON .= "\"fax\": \"".mysql_escape_string($item['masjid_fax'])."\", ";
-			$JSON .= "\"mobile\": \"".mysql_escape_string($item['masjid_mobile'])."\", ";
-			$JSON .= "\"email\": \"".mysql_escape_string($item['masjid_email'])."\", ";
-			$JSON .= "\"website\": \"".mysql_escape_string($item['masjid_website'])."\", ";
-			$JSON .= "\"comment\": \"".checkString($item['masjid_comment'])."\", ";
-			$JSON .= "\"jummah_address\": \"".mysql_escape_string($item['masjid_jummah_address'])."\", ";
-			$JSON .= "\"jummah_comment\": \"".checkString($item['masjid_jummah_comment'])."\",";
-			$JSON .= "\"distance\": \"".mysql_escape_string(number_format($item['distance'], 2))."\"}";
-			
-			if ($count == mysql_num_rows($result)) {
-	  			$JSON .= "";
-	  		}
-	  		else {
-	  			$JSON .= ", ";
-	  		}
-	  		$count++;
-	  	}
-	  	$JSON .= "]}";
-		
-	  	return $JSON;
+
+	function removeStepProgress ($step_id, $user_id) {
+		$sql = sprintf("DELETE FROM user_step WHERE user_id = '%d' AND step_id = '%d'",
+			$user_id, $step_id);
+
+		return executeSql($sql);
 	}
 ?>

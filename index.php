@@ -46,7 +46,7 @@
                     %>
                             <div class="no-modules">
                                 <h2>Get started now!</h2>
-                                <p>You currently don't have any modules assigned to you. Start achieving your dream of settling in and <a href="#modules-popup" class="open-popup-link">Add a new module</a>.</p>
+                                <p>You currently don't have any modules assigned to you. Start achieving your dream of settling in and <a href="#modules-popup" class="open-popup-link">add a new module</a>.</p>
                             </div>
                     <%
                         }
@@ -56,13 +56,18 @@
 
                 <script type="text/html" id="list_tasks">
                     <%
-                    console.log(tasks);
                         if (tasks.length) {
                             _.each(tasks, function (task, index) {
                     %>
-                    <div class="task expand-task">
+                    <div class="task task-<%= task.id %>" data-task-id="<%= task.id %>">
                         <div class="task-info">
-                            <div class="completed tick">
+                            <%
+                            var tick = "";
+                            if (task.task_progress.is_complete === "1") {
+                                tick = "tick";
+                            }
+                            %>
+                            <div class="completed <%= tick %>">
                                 <div class="completed-inner">
                                     <span class="c-icon c-icon-tick"></span>
                                 </div>
@@ -86,18 +91,17 @@
 
                         <div class="steps">
                             <ul>
+                                <%
+                                    _.each(task.steps, function (step, index) {
+                                        var checked = (step.step_progress.is_complete === "1") ? "checked" : "";
+                                %>
                                 <li>
-                                    <input type="checkbox" id="nearest1" name="" checked />
-                                    <label for="nearest1">Find your nearest branch</label>
+                                    <input type="checkbox" id="step_<%= step.id %>" data-step-id="<%= step.id %>" name="step_<%= step.id %>" <%= checked %> />
+                                    <label for="step_<%= step.id %>"><%= step.name %></label>
                                 </li>
-                                <li>
-                                    <input type="checkbox" id="visit1" name="" checked />
-                                    <label for="visit1">Visit an advisor</label>
-                                </li>
-                                <li>
-                                    <input type="checkbox" id="account1" name="" checked />
-                                    <label for="account1">Get your account details</label>
-                                </li>
+                                <%
+                                    });
+                                %>
                             </ul>
                         </div>
                     </div>

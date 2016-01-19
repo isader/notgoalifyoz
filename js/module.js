@@ -118,6 +118,13 @@
 			});
 		}
 
+		$(document).on('task/updated', function (event, totalTasks, moduleProgress, moduleIsComplete) {
+			var percentage = (moduleProgress * 100) / totalTasks;
+
+			$("#selected-module").find(".completed").css("width", percentage+"%");
+			$("#selected-module").find(".number").text(moduleProgress);
+		});
+
 
 		populateAllModules();
 		populateUserModules();
