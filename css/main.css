@@ -552,11 +552,28 @@ input[type=submit]:hover {
 
 .steps label {
     display: block;
-    padding: 10px 35px;
+    padding: 15px 35px;
     font-size: 14px;
     width: 100%;
     -moz-box-sizing: border-box;
     box-sizing: border-box;
+}
+
+.steps .expand-step {
+    position: absolute;
+    top: 12px;
+    right: 3px;
+    display: block;
+    padding: 2px 5px;
+    border-radius: 3px;
+    background-color: #fbfbfa;
+    border: 1px solid #e2e2e2;
+    color: #333;
+    z-index: 1;
+}
+
+.steps .expand-step:hover {
+    background-color: #e2e2e2;
 }
 
 .steps .step-desc {
@@ -731,7 +748,7 @@ input[type=submit]:hover {
   content: '';
   position: absolute;
   left:0;
-  top: 7px;
+  top: 12px;
   width: 23px;
   height: 23px;
   border-radius: 3px;
@@ -748,7 +765,7 @@ input[type=submit]:hover {
 [type="checkbox"]:checked + label:after {
   content: ' ';
   position: absolute;
-  top: 7px;
+  top: 12px;
   left: 0px;
   width: 23px;
   height: 23px;
@@ -811,6 +828,10 @@ label:hover:before {
 
 .hidden {
     display: none !important;
+}
+
+.hide {
+    display: none;
 }
 
 /*

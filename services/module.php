@@ -75,7 +75,7 @@
 		return formJson($result, "is_module_added", $user_id);
 	}
 
-	function getAllModule () {
+	function getAllModule ($user_id) {
 		$sql = sprintf("SELECT * FROM module");
 
 		return executeSql($sql);

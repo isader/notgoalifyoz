@@ -55,6 +55,16 @@
 					$(this).parents('.task').toggleClass('expand-task');
 				});
 
+				$(".j-expand-step").on('click', function (event) {
+					event.preventDefault();
+
+					var $stepDesc = $(this).siblings('.step-desc'),
+						txt = $stepDesc.is(':visible') ? 'expand' : 'close';
+
+				     $(this).text(txt);
+				     $stepDesc.slideToggle();
+				});
+
 				$('.steps input[type=checkbox]').on('click', function (event) {
 					var step, task, module,
 						step_id, isChecked,
@@ -118,7 +128,7 @@
 
 				$("#selected-module-tasks").html(html);
 				$("#selected-module-details").attr('data-module-id', data.module_id);
-				$("#selected-module-details a").attr("target", "_blank");
+				$("#selected-module-details a").not(".expand-step").attr("target", "_blank");
 
 				attachEvents();
 			}
