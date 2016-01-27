@@ -3,7 +3,15 @@
 	include_once("services/common.php");
 
 	function login ($email, $password) {
-		$sql = sprintf("SELECT user_id, first_name FROM user WHERE email = '%s' AND password = '%s'",
+
+		$email = checkString($email);
+		$password = checkString($password);
+
+		return doLogin($email, $password);
+	}
+
+	function doLogin ($email, $password) {
+		$sql = sprintf("SELECT user_id, first_name, last_name, age FROM user WHERE email = '%s' AND password = '%s'",
 				$email,
 				md5($password)
 		);

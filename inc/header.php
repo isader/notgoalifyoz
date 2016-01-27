@@ -23,7 +23,7 @@
 
         <script>
             <?php
-                echo "var user = ".$_COOKIE['ud'];
+                echo "var user = ".str_replace("\\","", $_COOKIE['ud']);
             ?>
         </script>
     </head>

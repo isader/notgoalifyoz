@@ -15,8 +15,10 @@
             while($user = mysql_fetch_array($login_result)) {
                 $user_id = $user['user_id'];
                 $first_name = $user['first_name'];
+                $last_name = $user['last_name'];
+                $age = $user['age'];
             }
-            $user_cookie = '{"user_id":'.$user_id.', "first_name":"'.$first_name.'"}';
+            $user_cookie = '{"user_id":'.$user_id.', "first_name":"'.$first_name.'", "last_name": "'.$last_name.'", "age": "'.$age.'"}';
             setcookie("ud", $user_cookie);
             header('Location: index.php');
         }

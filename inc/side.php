@@ -5,7 +5,7 @@
 
     <ul class="menu">
         <li class="add-module"><a href="#modules-popup" class="open-popup-link">Add module</a></li>
-        <li class="my-profile"><a href="#">My profile</a></li>
+        <li class="my-profile"><a href="#myprofile-popup" class="open-popup-link">My profile</a></li>
         <li class="sign-out"><a href="#">Sign out</a></li>
     </ul>
 </div>

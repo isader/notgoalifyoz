@@ -4,12 +4,11 @@
 	define("user", "root");
 	define("password", "password");
 	define("database", "goalifyoz");
-	
 	/*
-	define("host","118.139.168.102");
-	define("user", "goalifyoz");
-	define("password", "AMusl!ms!te99");
-	define("database", "goalifyoz");
+	define("host","166.62.8.50");
+	define("user", "settlein");
+	define("password", "ThisIsThePasswordForTheDB1!");
+	define("database", "settlein");
 	*/
 	function connect () {
 		$conn = mysql_connect(constant("host"), constant("user"), constant("password")) or die (mysql_error());

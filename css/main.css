@@ -296,6 +296,40 @@ input[type=submit]:hover {
     line-height: 24px;
 }
 
+#selected-module-details {
+    display: none;
+}
+
+/** -----
+    Return link
+    ----- **/
+.go-back {
+    float: left;
+    width: 100%;
+    margin: 0px 15px 20px;
+}
+
+.go-back .label {
+    float: left;
+    text-decoration: underline;
+    color: #333;
+}
+
+.c-icon-return {
+    float: left;
+    width: 15px;
+    height: 15px;
+    background-size: 100%;
+    background-repeat: no-repeat;
+    background-image: url(../img/return.svg);
+    margin: 7px 8px 0 0;
+}
+
+.go-back-to-all-modules {
+    float: left;
+    line-height: 30px;
+}
+
 /** -----
     Module **/
 
@@ -636,7 +670,7 @@ input[type=submit]:hover {
 }
 
 
-.modules-popup {
+.popup {
   position: relative;
   background: #FFF;
   padding: 20px;
@@ -645,7 +679,7 @@ input[type=submit]:hover {
   margin: 20px auto;
 }
 
-.modules-popup .module {
+.popup .module {
   float: none;
   position: relative;
   width: 100%;
@@ -653,19 +687,19 @@ input[type=submit]:hover {
   margin: 0 0 20px;
 }
 
-.modules-popup .module:hover {
+.popup .module:hover {
     cursor: pointer;
 }
 
-.modules-popup .module h2 {
+.popup .module h2 {
   margin: 10px 0;
 }
 
-.modules-popup .module-details {
+.popup .module-details {
     padding-bottom: 20px;
 }
 
-.modules-popup .module .add-module-action {
+.popup .module .add-module-action {
     display: none;
     position: absolute;
     top: 0;
@@ -677,22 +711,22 @@ input[type=submit]:hover {
     background-color: rgba(200, 200, 200, 0.9);
 }
 
-.modules-popup .module:hover .add-module-action {
+.popup .module:hover .add-module-action {
     display: block;
 }
 
-.modules-popup .module .add-icon {
+.popup .module .add-icon {
     display: block;
     width: 100%;
     height: 100%;
     font-size: 24px;
 }
 
-.modules-popup .module .add-icon.hide {
+.popup .module .add-icon.hide {
     display: none !important;
 }
 
-.modules-popup .module .add-icon:before {
+.popup .module .add-icon:before {
     content: ' ';
     display: block;
     width: 100px;
@@ -703,26 +737,52 @@ input[type=submit]:hover {
     background-repeat: no-repeat
 }
 
-.modules-popup .module .already-added {
+.popup .module .already-added {
     display: block;
     width: 100%;
     height: 100%;
     font-size: 24px;
 }
 
-.modules-popup .module .already-added.hide {
+.popup .module .already-added.hide {
     display: none !important;
 }
 
-.modules-popup .module .already-added:before {
+.popup .module .already-added:before {
     content: ' ';
     display: block;
     width: 100px;
     height: 75px;
     margin: 38px auto 10px;
-    background-image: url("../img/tick.svg");
+    background-image: url("../img/tick_black.svg");
     background-size: 100%;
     background-repeat: no-repeat
+}
+
+.myprofile-popup {
+    max-width: 320px;
+}
+
+.myprofile-popup .status p {
+    display: none;
+    padding: 5px 10px;
+    border-radius: 3px;
+}
+
+.myprofile-popup .success {
+    background-color: #87df6d;
+}
+
+.myprofile-popup .error {
+    background-color: #dfa66d;
+}
+
+.popup input {
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    width: 100%;
+    padding: 10px;
+    margin: 8px 0;
 }
 
 

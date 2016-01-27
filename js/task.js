@@ -2,7 +2,14 @@
 	$(document).ready(function () {
 
 		function taskStage (state) {
-			$('#user-modules').hide();
+			if (state === "show") {
+				$('#user-modules').hide();
+				$('#selected-module-details').show();
+			}
+			else {
+				$('#user-modules').show();
+				$('#selected-module-details').hide();
+			}
 		}
 
 		function populateCurrentModule (module) {
@@ -49,6 +56,11 @@
 			}
 
 			function attachEvents () {
+				$(".go-back-to-all-modules").on('click', function (event) {
+					event.preventDefault();
+
+					taskStage("hide");
+				});
 				$(".expand").on('click', function (event) {
 					event.preventDefault();
 
@@ -59,7 +71,7 @@
 					event.preventDefault();
 
 					var $stepDesc = $(this).siblings('.step-desc'),
-						txt = $stepDesc.is(':visible') ? 'expand' : 'close';
+						txt = $stepDesc.is(':visible') ? 'details' : 'close';
 
 				     $(this).text(txt);
 				     $stepDesc.slideToggle();

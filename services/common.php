@@ -28,16 +28,6 @@
 	    $value = htmlentities($value, ENT_QUOTES,'UTF-8'); //for major security transform some other chars into html corrispective...
 
 	    return $value;
-
-		/*
-		if (isset($string) && !empty($string)) {
-			$string = preg_replace("/[\n|\r]/","", $string);
-		    
-			return addslashes($string);
-		}
-		
-	    return "";
-		*/
 	}
 
 	function errorResponse ($message) {

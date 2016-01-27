@@ -11,6 +11,12 @@
                 <div class="modules">
                     <div id="user-modules"></div>
                     <div id="selected-module-details">
+                        <div class="go-back">
+                            <a href="#" class="go-back-to-all-modules">
+                                <span class="c-icon-return"></span>
+                                <span class="label">Go back to all modules</span>
+                            </a>
+                        </div>
                         <div id="selected-module"></div>
                         <div id="selected-module-tasks" class="tasks"></div>
                     </div>
@@ -98,7 +104,7 @@
                                 <li>
                                     <input type="checkbox" id="step_<%= step.id %>" data-step-id="<%= step.id %>" name="step_<%= step.id %>" <%= checked %> />
                                     <label for="step_<%= step.id %>"><%= step.name %></label>
-                                    <a href="#" class="expand-step j-expand-step">expand</a>
+                                    <a href="#" class="expand-step j-expand-step">details</a>
                                     <div class="step-desc hide"><%= step.brief_desc %></div>
                                 </li>
                                 <%
@@ -124,7 +130,7 @@
         </div>
 
 
-        <div id="modules-popup" class="modules-popup mfp-hide">
+        <div id="modules-popup" class="popup modules-popup mfp-hide">
             <div class="add-modules-container">
                 <h2>Add module</h2>
                 <p class="description">Some description about adding new modules</p>
@@ -154,6 +160,27 @@
                 });
             %>
         </script>
+
+        <div id="myprofile-popup" class="popup myprofile-popup mfp-hide">
+            <div class="my-profile-container">
+                <h2>My Profile</h2>
+                <p class="description">You can update your profile details using the form below. Please make sure your details are always up-to-date.</p>
+
+                <div class="status">
+                    <p class="success">Your details have been updated successfully!</p>
+                    <p class="error">There was an error while updating your details, please try again later.</p>
+                </div>
+
+                <form id="my-profile-form" class="my-profile-form" action="logic/myprofile.php" method="post">
+                    <input type="text" name="first_name" class="first-name" placeholder="First name" />
+                    <input type="text" name="last_name" class="last-name" placeholder="Last name" />
+                    <input type="text" name="age" class="age" placeholder="Age" />
+                    <input type="hidden" name="user_id" class="user-id" />
+                    <input type="hidden" name="myprofile_flag" value="1" />
+                    <input type="submit" value="Update" />
+                </form>
+            </div>
+        </div>
 
 <?php
     include_once('inc/footer.php');
