@@ -59,6 +59,7 @@
 				$(".go-back-to-all-modules").on('click', function (event) {
 					event.preventDefault();
 
+					$.magnificPopup.close();
 					taskStage("hide");
 				});
 				$(".expand").on('click', function (event) {

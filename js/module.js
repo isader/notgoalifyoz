@@ -129,11 +129,24 @@
 			});
 		}
 
+		function moduleCompleted () {
+			$.magnificPopup.open({
+			    items: {
+			        src: $("#module-completed-popup")
+			    },
+			    type: 'inline'
+			}, 0);
+		}
+
 		$(document).on('task/updated', function (event, totalTasks, moduleProgress, moduleIsComplete) {
 			var percentage = (moduleProgress * 100) / totalTasks;
 
 			$("#selected-module").find(".completed").css("width", percentage+"%");
 			$("#selected-module").find(".number").text(moduleProgress);
+
+			if (percentage === 100) {
+				moduleCompleted();
+			}
 		});
 
 

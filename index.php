@@ -182,6 +182,20 @@
             </div>
         </div>
 
+        <div id="module-completed-popup" class="popup module-completed-popup mfp-hide">
+            <div class="module-completed-container">
+                <div class="top-section">
+                    <h3>Well done!</h3>
+                    <p>You have successfully completed this module.</p>
+                    <a href="#" class="button go-back-to-all-modules">Go back to all modules</a>
+                </div>
+                <div class="bottom-section mfp-hide">
+                    <p>You are now ready to proceed to your next challenge. Go back to your modules</p>
+                    <p class="all-completed">We see that you have completed all your modules. Add new module</p>
+                </div>
+            </div>
+        </div>
+
 <?php
     include_once('inc/footer.php');
 ?>
